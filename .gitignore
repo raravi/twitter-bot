@@ -1,3 +1,4 @@
 /node_modules
 config-prod.js
 .DS_Store
+.env
