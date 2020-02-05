@@ -36,7 +36,7 @@ function retweet() {
 
   Twitter.get('search/tweets', params, (err, data, response) => {
     let tweets = [];
-    console.log('-------------------------------');
+    //console.log('-------------------------------');
     for (let i = 0; i < data.statuses.length; i++) {
       let tweet = data.statuses[i];
       let timeElapsed;
@@ -53,26 +53,26 @@ function retweet() {
         ) {
         let result = sentiment.analyze(tweet.text, optionsForSentiment);
         const intensity = vader.SentimentIntensityAnalyzer.polarity_scores(tweet.text);
-        console.log(timeElapsed, ' hour(s) ago');
-        console.log('Sentiment: ', result);
-        console.log('Vader Sentiment: ', intensity);
-        console.log(tweet.text);
-        console.log(tweet.possibly_sensitive);
-        console.log('-------------------------------');
+        // console.log(timeElapsed, ' hour(s) ago');
+        // console.log('Sentiment: ', result);
+        // console.log('Vader Sentiment: ', intensity);
+        // console.log(tweet.text);
+        // console.log(tweet.possibly_sensitive);
+        // console.log('-------------------------------');
         if (intensity.compound > 0.2 )
           tweets.push(tweet);
       }
     }
-    console.log('Length: ', tweets.length);
+    //console.log('Length: ', tweets.length);
     if (tweets.length === 0)
       return true;
     let selectedTweet = tweets[Math.random() * tweets.length | 0];
-    console.log(selectedTweet);
-    // Twitter.post( 'statuses/retweet/:id',
-    //               { id: selectedTweet.id_str },
-    //               (err, data, response) => {
-    //                 console.log(data);
-    //               });
+    //console.log(selectedTweet);
+    Twitter.post( 'statuses/retweet/:id',
+                  { id: selectedTweet.id_str },
+                  (err, data, response) => {
+                    console.log(data);
+                  });
   });
 }
 
