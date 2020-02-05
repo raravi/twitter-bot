@@ -1,7 +1,13 @@
 var twit = require('twit');
-var config = require('./config.js');
+const dotenv = require('dotenv');
+dotenv.config();
 
-var Twitter = new twit(config);
+var Twitter = new twit({
+  consumer_key: process.env.BOT_CONSUMER_KEY,
+  consumer_secret: process.env.BOT_CONSUMER_SECRET,
+  access_token: process.env.BOT_ACCESS_TOKEN,
+  access_token_secret: process.env.BOT_ACCESS_TOKEN_SECRET
+});
 
 console.log('The bot has started...');
 
@@ -47,4 +53,5 @@ function tweet() {
 }
 
 getTweets();
+setInterval(getTweets, 10 * 60 * 1000);
 //tweet();
