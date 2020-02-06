@@ -5,7 +5,14 @@ const twit = require('twit');
 const dotenv = require('dotenv');
 dotenv.config();
 
+/**
+ * An IIFE (Immediately Invoked Function Expression) to
+ * encapsulate the TwitterBot functionality.
+ */
 (function(root) {
+  /**
+   * The TwitterBot object: Holds the data relevant to the bot.
+   */
   function TwitterBot() {
     this.unitOfTime = 'hours';
     this.oneUnitOfTime = 60 * 60 * 1000;
@@ -16,6 +23,9 @@ dotenv.config();
     this.selectedTweetForRetweet;
     this.selectedTweetForFollow;
 
+    /**
+     * A Twit object to call Twitter API.
+     */
     this.Twitter = new twit({
       consumer_key: process.env.BOT_CONSUMER_KEY,
       consumer_secret: process.env.BOT_CONSUMER_SECRET,
@@ -23,6 +33,9 @@ dotenv.config();
       access_token_secret: process.env.BOT_ACCESS_TOKEN_SECRET
     });
 
+    /**
+     * A parameters object for get('search/tweets')
+     */
     this.paramsForSearch = {
       q: '#100DaysOfCode -filter:retweets',
       result_type: 'recent',
@@ -30,6 +43,9 @@ dotenv.config();
       lang: 'en'
     };
 
+    /**
+     * A parameters object for Sentiment API
+     */
     this.optionsForSentiment = {
       extras: {
         'learned': 2,
@@ -39,9 +55,15 @@ dotenv.config();
       }
     };
 
+    /**
+     * Initialise Sentiment API
+     */
     this.sentiment = new Sentiment();
   }
 
+  /**
+   * Tweet: Takes a string and tweets it.
+   */
   TwitterBot.prototype.tweet = function (text) {
     let tweet = {
         status: text
@@ -57,6 +79,10 @@ dotenv.config();
     });
   };
 
+  /**
+   * Retweet: Searches through the recent tweets, selects a tweet
+   * based on Sentiment AFINN score and retweets it.
+   */
   TwitterBot.prototype.retweet = function() {
     this.Twitter.get('search/tweets', this.paramsForSearch, (err, data, response) => {
       if (err) {
@@ -112,6 +138,11 @@ dotenv.config();
     });
   };
 
+  /**
+   * Follow: Gets a list of recent tweets, selects a tweet
+   * based on Sentiment AFINN score, and follows the
+   * user (if not followed already!) who tweeted it.
+   */
   TwitterBot.prototype.follow = function () {
     this.Twitter.get('friends/ids', { screen_name: 'amith_raravi' , stringify_ids: true }, (err, data, response) => {
       if (err) {
@@ -174,6 +205,10 @@ dotenv.config();
     });
   };
 
+  /**
+   * greetNewFollowers: If a new user follows my account, send
+   * a 'greeting' tweet mentioning the new user.
+   */
   TwitterBot.prototype.greetNewFollowers = function() {
     var stream = Twitter.stream('user');
     stream.on('follow', (event) => {
@@ -201,10 +236,16 @@ dotenv.config();
 
   console.log('The bot has started...');
 
+  /**
+   * Here are the calls to each of the functions, which are commented
+   * for safety reasons. Only test one function at a time. If called
+   * indiscriminately, it's quite easy to hit the Twitter API Rate Limits.
+   * And possibly get banned!!! You have been warned.
+   */
   // twitterBot.tweet("Hello World!");
-  twitterBot.retweet();
-  setInterval(twitterBot.retweet.bind(twitterBot), twitterBot.intervalForRetweet);
-  twitterBot.follow();
-  setInterval(twitterBot.follow.bind(twitterBot), twitterBot.intervalForFollow);
+  // twitterBot.retweet();
+  // setInterval(twitterBot.retweet.bind(twitterBot), twitterBot.intervalForRetweet);
+  // twitterBot.follow();
+  // setInterval(twitterBot.follow.bind(twitterBot), twitterBot.intervalForFollow);
   // twitterBot.greetNewFollowers();
 })(this);
