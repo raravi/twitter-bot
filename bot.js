@@ -201,7 +201,7 @@ dotenv.config();
 
   console.log('The bot has started...');
 
-  // twitterBot.tweet("\“Programming today is a race between software engineers striving to build bigger and better idiot-proof programs, and the Universe trying to produce bigger and better idiots. So far, the Universe is winning.\”\n\n― Rick Cook, The Wizardry Compiled\n\n#codinghumor");
+  // twitterBot.tweet("Hello World!");
   twitterBot.retweet();
   setInterval(twitterBot.retweet, this.intervalForRetweet);
   twitterBot.follow();
