@@ -2,9 +2,9 @@
 
 A Twitter bot for my account!
 
-I started this project with the intention of learning Twitter APIs, and it grew into a nice little bot for keeping track of recent updates on my Twitter.
+I started this project with the intention of learning **Twitter APIs**, and it grew into a nice little bot for keeping track of recent updates on my Twitter.
 
-The code is written in Javascript which runs in node.js environment and is deployed on Heroku.
+The code is written in Javascript which runs in **node.js** environment and is deployed on **Heroku**.
 
 It demonstrates the following capabilities:
 
