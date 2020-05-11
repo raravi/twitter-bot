@@ -244,8 +244,8 @@ dotenv.config();
    */
   // twitterBot.tweet("Hello World!");
   // twitterBot.retweet();
-  // setInterval(twitterBot.retweet.bind(twitterBot), twitterBot.intervalForRetweet);
+  setInterval(twitterBot.retweet.bind(twitterBot), twitterBot.intervalForRetweet);
   // twitterBot.follow();
-  // setInterval(twitterBot.follow.bind(twitterBot), twitterBot.intervalForFollow);
+  setInterval(twitterBot.follow.bind(twitterBot), twitterBot.intervalForFollow);
   // twitterBot.greetNewFollowers();
 })(this);
