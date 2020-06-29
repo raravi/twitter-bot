@@ -34,3 +34,5 @@ Follow these steps for setting up your own twitter bot from this repository:
 4. Create a Free Tier Heroku account, and create a new app in there. See the [node.js deployment page](https://devcenter.heroku.com/articles/getting-started-with-nodejs?singlepage=true) on Heroku for more information.
 
 Have fun!
+
+[![ko-fi](https://www.ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/Y8Y21VCIL)
