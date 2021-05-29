@@ -11,7 +11,7 @@
   "homepage": "https://www.amithraravi.com/",
   "license": "MIT",
   "dependencies": {
-    "dotenv": "^9.0.2",
+    "dotenv": "^10.0.0",
     "moment": "^2.29.1",
     "sentiment": "^5.0.2",
     "twit": "^2.2.11",
